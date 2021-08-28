@@ -1,4 +1,8 @@
 # GNN-TL
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6223ed9d9eb8ba67a0836fe2803ae89b19453aea
 The GNN-TL can  predict the retention time with the GNN-learned representations. It takes molecular graph as the input, and the predicted retention time as the output. The Overview of GNN-TL is showed as following:
 
 ![GNN-TL](https://github.com/Qiong-Yang/GNN-TL/blob/main/support/GNN-TL.png, GNN-TL)
@@ -17,5 +21,9 @@ conda install -c rdkit rdkit
 
 # Usage
 
+<<<<<<< HEAD
 If you want to make the prediction of Fiehnlab HILIC experimental system RT of unknown molecule, please put your spectra files in to **data** directory and run  preprocess.py and transferlearning.py
 
+=======
+If you want to make the prediction of Fiehnlab HILIC experimental system RT of unknown molecule, please put your spectra files in to **data** directory and run  preprocess.py and transferlearning.py
+>>>>>>> 6223ed9d9eb8ba67a0836fe2803ae89b19453aea
