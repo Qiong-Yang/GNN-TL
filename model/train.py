@@ -57,24 +57,6 @@ class MolecularGraphNeuralNetwork(nn.Module):
     def gnn(self, inputs):
 
         """Cat or pad each input data for batch processing."""
-<<<<<<< HEAD
-        Smiles,fingerprints, adjacencies, molecular_sizes = inputs
-        fingerprints=[t.cuda() for t in fingerprints]
-        adjacencies=[t.cuda() for t in adjacencies]
-      
-        fingerprints = torch.cat(fingerprints)
-        adjacencies = self.pad( adjacencies, 0)
-
-        """GNN layer (update the fingerprint vectors)."""
-        fingerprint_vectors = self.embed_fingerprint(fingerprints)
-        for l in range(layer_hidden):
-            hs = self.update(adjacencies, fingerprint_vectors, l)
-            fingerprint_vectors = F.normalize(hs, 2, 1)  # normalize.
-
-        """Molecular vector by sum or mean of the fingerprint vectors."""
-        molecular_vectors = self.sum(fingerprint_vectors, molecular_sizes)
-        # molecular_vectors = self.mean(fingerprint_vectors, molecular_sizes)
-=======
         Smiles,subgraphs, adjacencies, molecular_sizes = inputs
         subgraphs=[t.cuda() for t in subgraphs]
         adjacencies=[t.cuda() for t in adjacencies]
@@ -91,7 +73,6 @@ class MolecularGraphNeuralNetwork(nn.Module):
         """Molecular vector by sum or mean of the subgraph vectors."""
         molecular_vectors = self.sum(subgraph_vectors, molecular_sizes)
         
->>>>>>> 6223ed9d9eb8ba67a0836fe2803ae89b19453aea
 
         return Smiles,molecular_vectors
 
@@ -188,11 +169,7 @@ def dump_dictionary(dictionary, filename):
 if __name__ == "__main__":
     datafile='HILIC_pre_train_'
     radius=1
-<<<<<<< HEAD
-    dim=48pre_train
-=======
     dim=48
->>>>>>> 6223ed9d9eb8ba67a0836fe2803ae89b19453aea
     layer_hidden=10
     layer_output=10
     batch_train=8

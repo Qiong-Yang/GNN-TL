@@ -57,22 +57,6 @@ class MolecularGraphNeuralNetwork(nn.Module):
     def gnn(self, inputs):
 
         """Cat or pad each input data for batch processing."""
-<<<<<<< HEAD
-        Smiles,fingerprints, adjacencies, molecular_sizes = inputs
-        fingerprints=[t.cuda() for t in fingerprints]
-        adjacencies=[t.cuda() for t in adjacencies]
-      
-        fingerprints = torch.cat(fingerprints)
-        adjacencies = self.pad( adjacencies, 0)
-        """GNN layer (update the fingerprint vectors)."""
-        fingerprint_vectors = self.embed_fingerprint(fingerprints)
-        for l in range(layer_hidden):
-            hs = self.update(adjacencies, fingerprint_vectors, l)
-            fingerprint_vectors = F.normalize(hs, 2, 1)  # normalize.
-
-        """Molecular vector by sum or mean of the fingerprint vectors."""
-        molecular_vectors = self.sum(fingerprint_vectors, molecular_sizes)
-=======
         Smiles,subgraphs, adjacencies, molecular_sizes = inputs
         subgraphs=[t.cuda() for t in subgraphs]
         adjacencies=[t.cuda() for t in adjacencies]
@@ -87,7 +71,6 @@ class MolecularGraphNeuralNetwork(nn.Module):
 
         """Molecular vector by sum or mean of the subgraph vectors."""
         molecular_vectors = self.sum(subgraph_vectors, molecular_sizes)
->>>>>>> 6223ed9d9eb8ba67a0836fe2803ae89b19453aea
         return Smiles,molecular_vectors
 
     def mlp(self, vectors):
@@ -106,12 +89,8 @@ class MolecularGraphNeuralNetwork(nn.Module):
         if train:
             Smiles,molecular_vectors = self.gnn(inputs)
             predicted_values = self.mlp(molecular_vectors)
-<<<<<<< HEAD
             a=nn.L1Loss()
             loss = a(correct_values, predicted_values)
-=======
-            loss = F.mse_loss(predicted_values, correct_values)
->>>>>>> 6223ed9d9eb8ba67a0836fe2803ae89b19453aea
             return loss
         else:
             with torch.no_grad():
@@ -235,11 +214,7 @@ if __name__ == "__main__":
     decay_interval=100
     iteration_tf=500
     N=5000
-<<<<<<< HEAD
-    path='data/'
-=======
     path='/data/'
->>>>>>> 6223ed9d9eb8ba67a0836fe2803ae89b19453aea
     if torch.cuda.is_available():
         device = torch.device('cuda')
         print('The code uses a GPU!')
@@ -250,11 +225,7 @@ if __name__ == "__main__":
     import datetime
     time1=str(datetime.datetime.now())[0:13]
     dataset= pp.transferlearning_dataset('HILIC-train.txt')
-<<<<<<< HEAD
     dataset_train, dataset_dev = split_dataset(dataset, 0.7)
-=======
-    dataset_train, dataset_dev = split_dataset(dataset, 0.9)
->>>>>>> 6223ed9d9eb8ba67a0836fe2803ae89b19453aea
     dataset_test = pp.transferlearning_dataset('HILIC-test.txt') 
     dataset_val= pp.transferlearning_dataset('HILIC-val.txt') 
     
@@ -270,11 +241,7 @@ if __name__ == "__main__":
     torch.manual_seed(1234)
     model= MolecularGraphNeuralNetwork(
         N, dim, layer_hidden, layer_output).to(device)
-<<<<<<< HEAD
-    file_model='/model/pre-train-model.h5'
-=======
     file_model='/model/pre_GNN_model.h5'
->>>>>>> 6223ed9d9eb8ba67a0836fe2803ae89b19453aea
     model.load_state_dict(torch.load(file_model))
     for para in model.W_fingerprint.parameters():
         para.requires_grad = False
