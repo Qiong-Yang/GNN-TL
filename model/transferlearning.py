@@ -89,7 +89,8 @@ class MolecularGraphNeuralNetwork(nn.Module):
         if train:
             Smiles,molecular_vectors = self.gnn(inputs)
             predicted_values = self.mlp(molecular_vectors)
-            loss = F.mse_loss(predicted_values, correct_values)
+            a=nn.L1Loss()
+            loss = a(correct_values, predicted_values)
             return loss
         else:
             with torch.no_grad():
@@ -224,7 +225,7 @@ if __name__ == "__main__":
     import datetime
     time1=str(datetime.datetime.now())[0:13]
     dataset= pp.transferlearning_dataset('HILIC-train.txt')
-    dataset_train, dataset_dev = split_dataset(dataset, 0.9)
+    dataset_train, dataset_dev = split_dataset(dataset, 0.7)
     dataset_test = pp.transferlearning_dataset('HILIC-test.txt') 
     dataset_val= pp.transferlearning_dataset('HILIC-val.txt') 
     

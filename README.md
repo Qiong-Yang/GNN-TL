@@ -18,3 +18,4 @@ conda install -c rdkit rdkit
 # Usage
 
 If you want to make the prediction of Fiehnlab HILIC experimental system RT of unknown molecule, please put your spectra files in to **data** directory and run  preprocess.py and transferlearning.py
+
