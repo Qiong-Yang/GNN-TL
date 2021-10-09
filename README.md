@@ -2,7 +2,7 @@
 
 The GNN-TL can  predict the retention time with the GNN-learned representations. It takes molecular graph as the input, and the predicted retention time as the output. The Overview of GNN-TL is showed as following:
 
-![GNN-TL]([GNN-TL/GNN-TL.png at main · Qiong-Yang/GNN-TL (github.com)](https://github.com/Qiong-Yang/GNN-TL/blob/main/figure/GNN-TL.png))
+![GNN-TL](https://github.com/Qiong-Yang/GNN-TL/blob/main/figure/GNN-TL.png)
 
 # Motivation
 
